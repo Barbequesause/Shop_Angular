@@ -1,17 +1,16 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 import { Product } from './product';
 import { ProductList } from './product-list/product-list';
 import { Cart } from './cart/cart';
 
 @Component({
-  imports: [RouterOutlet, ProductList, Cart],
   selector: 'app-root',
-  styleUrl: './app.scss',
+  imports: [ProductList, Cart],
   templateUrl: './app.html',
+  styleUrl: './app.scss',
 })
 export class App {
-  products = [
+  products: Product[] = [
     { id: 1, name: 'Klawiatura', price: 199 },
     { id: 2, name: 'Mysz', price: 99 },
     { id: 3, name: 'Monitor', price: 899 },
@@ -23,6 +22,7 @@ export class App {
   addToCart(product: Product) {
     this.cart = [...this.cart, product];
   }
+
   removeFromCart(index: number) {
     this.cart = this.cart.filter((_, i) => i !== index);
   }
