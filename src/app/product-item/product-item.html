@@ -1,1 +1,5 @@
-<p>product-item works!</p>
+<div class="product">
+  <h3>{{ product.name }}</h3>
+  <p>{{ product.price }} zł</p>
+  <button (click)="addProduct.emit(product)">Dodaj do koszyczka</button>
+</div>

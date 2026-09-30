@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Product } from '../product';
 
 @Component({
-  imports: [],
   selector: 'app-product-item',
-  styleUrl: './product-item.scss',
   templateUrl: './product-item.html',
+  styleUrl: './product-item.scss',
 })
-export class ProductItem {}
+export class ProductItem {
+  @Input({ required: true }) product!: Product;
+  @Output() addProduct = new EventEmitter<Product>();
+}
