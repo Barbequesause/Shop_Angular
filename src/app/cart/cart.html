@@ -1,1 +1,14 @@
-<p>cart works!</p>
+<h2>Koszyczek</h2>
+
+@if (items.length === 0) {
+  <p>Koszyk jest pusty.</p>
+} @else {
+  @for (item of items; track $index) {
+    <div>
+      {{ item.name }} {{ item.price }} zł
+      <button (click)="remove.emit($index)">Usuń</button>
+    </div>
+  }
+  <hr />
+  <p>RAZEM {{ total }} zł</p>
+}
