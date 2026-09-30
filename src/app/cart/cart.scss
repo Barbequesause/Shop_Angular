@@ -1,0 +1,36 @@
+h2 {
+  margin: 8px 0 16px;
+}
+
+.empty {
+  opacity: 0.7;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 0;
+}
+
+.name {
+  flex: 1;
+}
+
+.price {
+  font-weight: 500;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  margin: 16px 0;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}

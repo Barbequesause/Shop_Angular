@@ -1,14 +1,22 @@
-<h2>Koszyczek</h2>
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <h2>KOSZYK</h2>
 
-@if (items.length === 0) {
-  <p>Koszyk jest pusty.</p>
-} @else {
-  @for (item of items; track $index) {
-    <div>
-      {{ item.name }} {{ item.price }} zł
-      <button (click)="remove.emit($index)">Usuń</button>
-    </div>
-  }
-  <hr />
-  <p>RAZEM {{ total }} zł</p>
-}
+    @if (items.length === 0) {
+      <p class="empty">Koszyk jest pusty.</p>
+    } @else {
+      @for (item of items; track $index) {
+        <div class="row">
+          <span class="name">{{ item.name }}</span>
+          <span class="price">{{ item.price }} zł</span>
+          <button matButton="tonal" (click)="remove.emit($index)">Usuń</button>
+        </div>
+      }
+      <hr />
+      <p class="total">
+        <span>RAZEM</span>
+        <span>{{ total }} zł</span>
+      </p>
+    }
+  </mat-card-content>
+</mat-card>

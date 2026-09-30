@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$green-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+
+  @include mat.theme-overrides(
+    (
+      primary: #db9558,
+      on-primary: #3b2410,
+      secondary-container: #a8bba3,
+      on-secondary-container: #23301d,
+      surface: #fcf9ea,
+      background: #fcf9ea,
+      on-surface: #2b2b22,
+      outline-variant: #97a87a,
+    )
+  );
+}
+
+body {
+  margin: 0;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}

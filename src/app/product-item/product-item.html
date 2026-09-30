@@ -1,5 +1,9 @@
-<div class="product">
-  <h3>{{ product.name }}</h3>
-  <p>{{ product.price }} zł</p>
-  <button (click)="addProduct.emit(product)">Dodaj do koszyczka</button>
-</div>
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <h3>{{ product.name }}</h3>
+    <p class="price">{{ product.price }} zł</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button matButton="filled" (click)="addProduct.emit(product)">Dodaj do koszyka</button>
+  </mat-card-actions>
+</mat-card>

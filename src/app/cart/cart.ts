@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { Product } from '../product';
 
 @Component({
-  imports: [],
   selector: 'app-cart',
-  styleUrl: './cart.scss',
+  imports: [MatButtonModule, MatCardModule],
   templateUrl: './cart.html',
+  styleUrl: './cart.scss',
 })
 export class Cart {
   @Input() items: Product[] = [];
