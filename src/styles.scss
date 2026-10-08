@@ -1,33 +1,61 @@
-@use '@angular/material' as mat;
+:root {
+  --cream: #f5efe3;
+  --olive: #4f5b2a;
+  --gold: #b8892d;
+  --beige: #d8c9a8;
+  --text: #2b2f17;
 
-html {
-  @include mat.theme(
-    (
-      color: (
-        theme-type: light,
-        primary: mat.$green-palette,
-      ),
-      typography: Roboto,
-      density: 0,
-    )
-  );
-
-  @include mat.theme-overrides(
-    (
-      primary: #db9558,
-      on-primary: #3b2410,
-      secondary-container: #a8bba3,
-      on-secondary-container: #23301d,
-      surface: #fcf9ea,
-      background: #fcf9ea,
-      on-surface: #2b2b22,
-      outline-variant: #97a87a,
-    )
-  );
+  /* nadpisanie kolorów Angular Material */
+  --mat-sys-primary: #4f5b2a;
+  --mat-sys-on-primary: #f5efe3;
+  --mat-sys-surface: #f5efe3;
+  --mat-sys-on-surface: #2b2f17;
+  --mat-sys-outline: #4f5b2a;
+  --mat-sys-outline-variant: #d8c9a8;
 }
 
 body {
   margin: 0;
-  background: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
+  background: var(--cream);
+  color: var(--text);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--olive);
+}
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background: var(--olive);
+  color: var(--cream);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--gold);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.btn-light {
+  padding: 4px 10px;
+  border: 1px solid var(--olive);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--olive);
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn-light:hover {
+  background: var(--beige);
 }

@@ -1,15 +1,53 @@
-:host {
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  gap: 20px;
+  background: var(--olive);
+  color: var(--cream);
+}
+
+.header a {
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.cart-hover {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 380px;
+  max-width: 90vw;
+  padding: 16px;
+  background: var(--cream);
+  color: var(--text);
+  border: 2px solid var(--beige);
+  border-radius: 8px;
+}
+
+.cart-hover:hover .dropdown {
   display: block;
-  max-width: 960px;
+}
+
+main {
+  max-width: 1000px;
   margin: 0 auto;
   padding: 24px 16px;
-}
-
-h1 {
-  margin: 0 0 24px;
-}
-
-app-cart {
-  display: block;
-  margin-top: 32px;
 }

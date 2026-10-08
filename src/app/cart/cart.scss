@@ -1,16 +1,14 @@
-h2 {
-  margin: 8px 0 16px;
-}
-
-.empty {
-  opacity: 0.7;
+:host {
+  display: block;
+  min-width: 280px;
 }
 
 .row {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 4px 0;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--beige);
 }
 
 .name {
@@ -18,19 +16,15 @@ h2 {
 }
 
 .price {
-  font-weight: 500;
+  min-width: 90px;
+  text-align: right;
 }
 
-hr {
-  border: none;
-  border-top: 1px solid var(--mat-sys-outline-variant);
-  margin: 16px 0;
+.row button {
+  min-width: 40px;
+  padding: 0 8px;
 }
 
 .total {
-  display: flex;
-  justify-content: space-between;
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 18px;
 }

@@ -1,22 +1,28 @@
-<mat-card appearance="outlined">
-  <mat-card-content>
-    <h2>KOSZYK</h2>
+@if (cart.items().length === 0) {
+  <p>Koszyk jest pusty.</p>
+} @else {
+  @for (item of cart.items(); track item.product.id) {
+    <div class="row">
+      <span class="name">{{ item.quantity }}x {{ item.product.name }}</span>
 
-    @if (items.length === 0) {
-      <p class="empty">Koszyk jest pusty.</p>
-    } @else {
-      @for (item of items; track $index) {
-        <div class="row">
-          <span class="name">{{ item.name }}</span>
-          <span class="price">{{ item.price }} zł</span>
-          <button matButton="tonal" (click)="remove.emit($index)">Usuń</button>
-        </div>
+      @if (editable) {
+        <button matButton="outlined" (click)="cart.decrease(item.product.id)">−</button>
+        <button matButton="outlined" (click)="cart.increase(item.product.id)">+</button>
       }
-      <hr />
-      <p class="total">
-        <span>RAZEM</span>
-        <span>{{ total }} zł</span>
-      </p>
-    }
-  </mat-card-content>
-</mat-card>
+
+      <span class="price">{{ item.product.price * item.quantity | currency: 'PLN' }}</span>
+
+      @if (editable) {
+        <button matButton (click)="cart.remove(item.product.id)">Usuń</button>
+      }
+    </div>
+  }
+
+  <p class="total">
+    Razem: <strong>{{ cart.total() | currency: 'PLN' }}</strong>
+  </p>
+
+  @if (editable) {
+    <a matButton="filled" routerLink="/checkout">Do kasy</a>
+  }
+}

@@ -1,9 +1,15 @@
 <mat-card appearance="outlined">
+  <a [routerLink]="['/product', product.id]">
+    <img mat-card-image [src]="product.image" [alt]="product.name" />
+  </a>
   <mat-card-content>
-    <h3>{{ product.name }}</h3>
-    <p class="price">{{ product.price }} zł</p>
+    <h3>
+      <a [routerLink]="['/product', product.id]">{{ product.name }}</a>
+    </h3>
+    <p class="rating">★ {{ product.rating }}</p>
+    <p class="price">{{ product.price | currency: 'PLN' }}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button matButton="filled" (click)="addProduct.emit(product)">Dodaj do koszyka</button>
+    <button class="btn" (click)="cart.add(product)">Dodaj do koszyka</button>
   </mat-card-actions>
 </mat-card>

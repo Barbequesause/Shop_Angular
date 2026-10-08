@@ -1,0 +1,51 @@
+.product {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.zoom {
+  width: 450px;
+  max-width: 100%;
+  overflow: hidden;
+  background: white;
+  border: 2px solid var(--beige);
+  cursor: zoom-in;
+}
+
+.zoom img {
+  display: block;
+  width: 100%;
+  transition: transform 0.2s;
+}
+
+.zoom:hover img {
+  transform: scale(2);
+}
+
+.stars {
+  color: var(--gold);
+  font-size: 22px;
+}
+
+.grade {
+  margin-left: 8px;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--olive);
+}
+
+swiper-container {
+  --swiper-navigation-color: var(--olive);
+}
+
+swiper-slide {
+  width: 240px;
+  height: auto;
+}

@@ -1,3 +1,16 @@
-<h1>Sklep</h1>
-<app-product-list [products]="products" (addProduct)="addToCart($event)" />
-<app-cart [items]="cart" (remove)="removeFromCart($event)" />
+<mat-toolbar class="header">
+  <a routerLink="/" class="logo">Sklep</a>
+  <a routerLink="/">Produkty</a>
+  <span class="spacer"></span>
+
+  <div class="cart-hover">
+    <a routerLink="/cart">Koszyk ({{ cart.count() }})</a>
+    <div class="dropdown">
+      <app-cart />
+    </div>
+  </div>
+</mat-toolbar>
+
+<main>
+  <router-outlet />
+</main>

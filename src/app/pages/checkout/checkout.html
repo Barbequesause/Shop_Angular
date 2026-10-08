@@ -1,0 +1,67 @@
+<h1>Płatność</h1>
+
+<div class="layout">
+  <form [formGroup]="form" (ngSubmit)="send()">
+    <mat-form-field appearance="outline">
+      <mat-label>Imię</mat-label>
+      <input matInput formControlName="firstName" />
+      <mat-error>Wpisz imię</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nazwisko</mat-label>
+      <input matInput formControlName="lastName" />
+      <mat-error>Wpisz nazwisko</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error>Wpisz poprawny e-mail</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Adres (ulica i numer)</mat-label>
+      <input matInput formControlName="address" />
+      <mat-error>Wpisz adres</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Miasto</mat-label>
+      <input matInput formControlName="city" />
+      <mat-error>Wpisz miasto</mat-error>
+    </mat-form-field>
+
+    <h3>Forma płatności</h3>
+    <mat-radio-group formControlName="payment">
+      <mat-radio-button value="BLIK">BLIK</mat-radio-button>
+      <mat-radio-button value="Karta">Karta</mat-radio-button>
+      <mat-radio-button value="Przelew">Przelew</mat-radio-button>
+    </mat-radio-group>
+
+    @if (payment() === 'BLIK') {
+      <mat-form-field appearance="outline">
+        <mat-label>Kod BLIK (6 cyfr)</mat-label>
+        <input matInput formControlName="blikCode" />
+        <mat-error>Kod BLIK to 6 cyfr</mat-error>
+      </mat-form-field>
+    }
+
+    @if (payment() === 'Karta') {
+      <mat-form-field appearance="outline">
+        <mat-label>Numer karty (16 cyfr)</mat-label>
+        <input matInput formControlName="cardNumber" />
+        <mat-error>Numer karty to 16 cyfr</mat-error>
+      </mat-form-field>
+    }
+
+    <button matButton="filled" type="submit" [disabled]="sending()">
+      {{ sending() ? 'Przetwarzanie...' : 'Zapłać ' + (cart.total() | currency: 'PLN') }}
+    </button>
+  </form>
+
+  <aside>
+    <h2>Twoje zamówienie</h2>
+    <app-cart [editable]="false" />
+  </aside>
+</div>

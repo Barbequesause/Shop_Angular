@@ -1,0 +1,31 @@
+@if (product; as p) {
+  <div class="product">
+    <div class="zoom" (mousemove)="move($event)">
+      <img [src]="p.bigImage" [alt]="p.name" [style.transform-origin]="origin" />
+    </div>
+
+    <div class="info">
+      <h1>{{ p.name }}</h1>
+      <p class="stars">
+        @for (s of stars; track s) {
+          <span>{{ p.rating >= s ? '★' : '☆' }}</span>
+        }
+        <span class="grade">{{ p.rating }} / 5</span>
+      </p>
+      <p class="price">{{ p.price | currency: 'PLN' }}</p>
+      <p>{{ p.description }}</p>
+      <button matButton="filled" (click)="cart.add(p)">Dodaj do koszyka</button>
+    </div>
+  </div>
+
+  <h2>Zobacz też</h2>
+  <swiper-container slides-per-view="auto" space-between="16" navigation="true">
+    @for (o of others; track o.id) {
+      <swiper-slide>
+        <app-product-item [product]="o" />
+      </swiper-slide>
+    }
+  </swiper-container>
+} @else {
+  <p>Nie znaleziono produktu.</p>
+}

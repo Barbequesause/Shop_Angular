@@ -1,0 +1,23 @@
+@if (order(); as o) {
+  <h1>Wróć i kup więcej!!</h1>
+  <p>
+    Numer zamówienia: <strong>{{ o.id }}</strong>
+  </p>
+
+  <h2>Produkty</h2>
+  @for (item of o.items; track item.product.id) {
+    <div class="row">
+      <span>{{ item.quantity }}x {{ item.product.name }}</span>
+      <span>{{ item.product.price * item.quantity | currency: 'PLN' }}</span>
+    </div>
+  }
+  <p class="total">
+    Razem: <strong>{{ o.total | currency: 'PLN' }}</strong>
+  </p>
+
+  <h2>Dostawa i płatność</h2>
+  <p>{{ o.name }}<br />{{ o.address }}</p>
+  <p>Forma płatności: {{ o.payment }}</p>
+
+  <a matButton="filled" routerLink="/">Wróć do sklepu</a>
+}

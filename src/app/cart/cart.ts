@@ -1,19 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, Input, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { Product } from '../product';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-cart',
-  imports: [MatButtonModule, MatCardModule],
+  imports: [CurrencyPipe, RouterLink, MatButtonModule],
   templateUrl: './cart.html',
   styleUrl: './cart.scss',
 })
 export class Cart {
-  @Input() items: Product[] = [];
-  @Output() remove = new EventEmitter<number>();
+  cart = inject(CartService);
 
-  get total(): number {
-    return this.items.reduce((sum, item) => sum + item.price, 0);
-  }
+  @Input() editable = true;
 }

@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  max-width: 600px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--beige);
+}
+
+.total {
+  font-size: 18px;
+}
