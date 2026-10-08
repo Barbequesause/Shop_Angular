@@ -14,7 +14,7 @@
       </p>
       <p class="price">{{ p.price | currency: 'PLN' }}</p>
       <p>{{ p.description }}</p>
-      <button matButton="filled" (click)="cart.add(p)">Dodaj do koszyka</button>
+      <button class="btn" (click)="cart.add(p)">Dodaj do koszyka</button>
     </div>
   </div>
 

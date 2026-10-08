@@ -6,14 +6,14 @@
       <span class="name">{{ item.quantity }}x {{ item.product.name }}</span>
 
       @if (editable) {
-        <button matButton="outlined" (click)="cart.decrease(item.product.id)">−</button>
-        <button matButton="outlined" (click)="cart.increase(item.product.id)">+</button>
+        <button class="btn-light" (click)="cart.decrease(item.product.id)">−</button>
+        <button class="btn-light" (click)="cart.increase(item.product.id)">+</button>
       }
 
       <span class="price">{{ item.product.price * item.quantity | currency: 'PLN' }}</span>
 
       @if (editable) {
-        <button matButton (click)="cart.remove(item.product.id)">Usuń</button>
+        <button class="btn-light" (click)="cart.remove(item.product.id)">Usuń</button>
       }
     </div>
   }
@@ -23,6 +23,6 @@
   </p>
 
   @if (editable) {
-    <a matButton="filled" routerLink="/checkout">Do kasy</a>
+    <a class="btn" routerLink="/checkout">Do kasy</a>
   }
 }
