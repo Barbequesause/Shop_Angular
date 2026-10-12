@@ -1,0 +1,73 @@
+WYTŁUMACZENIE BIBLIOTEKI I FUNKCJI JAKIE MAM W PROJEKCIE
+Biblioteki
+
+Angular Material (@angular/material) to gotowe komponenty interfejsu w stylu Material Design. Używam tych:
+
+MatToolbarModule: pasek nawigacji u góry strony (<mat-toolbar>).
+MatCardModule: karty produktów (<mat-card>).
+MatFormFieldModule i MatInputModule: pola formularza płatności z etykietą i komunikatem błędu (<mat-form-field>, <mat-error>).
+MatRadioModule: wybór formy płatności (<mat-radio-group>).
+MatSnackBar: toast z komunikatem o błędzie płatności.
+MatButtonModule: po zamianie na własne przyciski (class="btn") nie jest już potrzebny. Możesz usunąć go z imports w komponentach, bo Angular pokazuje ostrzeżenia, że nie jest używany.
+
+Angular Router (@angular/router) odpowiada za nawigację między stronami bez przeładowania.
+
+Routes to lista tras: '', product/:id, cart, checkout, summary.
+loadComponent to lazy loading, czyli strona ładuje się dopiero po wejściu na jej adres.
+RouterLink to link w szablonie, RouterOutlet to miejsce, w którym wyświetla się aktualna strona.
+canActivate z guardami blokuje wejście na stronę, jeśli nie spełniony jest warunek.
+Router.navigate() to przekierowanie z kodu, np. na /summary po udanej płatności.
+
+Angular Forms (@angular/forms) to reactive forms w formularzu płatności.
+
+FormBuilder.group() tworzy formularz z polami.
+Validators (required, email, pattern) sprawdzają poprawność pól.
+markAllAsTouched() pokazuje błędy przy wszystkich polach po kliknięciu „Zapłać”.
+
+RxJS interop (@angular/core/rxjs-interop) łączy strumienie Angulara z signalami.
+
+toSignal() zamienia zmiany wartości pola formularza na signal, żeby szablon wiedział, jaka forma płatności jest wybrana.
+takeUntilDestroyed() zatrzymuje nasłuchiwanie, gdy komponent jest niszczony.
+
+Swiper (swiper) to biblioteka karuzeli. W product-page.html używam elementu <swiper-container> z <swiper-slide> (karuzela „Zobacz też” z strzałkami i przeciąganiem). Rejestruję go w product-page.ts przez register() w afterNextRender, czyli tylko w przeglądarce, bo serwer (SSR) go nie obsługuje.
+
+ngx-image-zoom zainstalowałeś, ale nie jest już używany (zoom zrobiliśmy własnym kodem). Możesz go usunąć: npm uninstall ngx-image-zoom.
+
+SCSS to rozszerzony CSS (zagnieżdżanie reguł, zmienne). Kolory trzymam jako zmienne CSS w styles.scss (--olive, --gold itd.).
+
+Najważniejsze funkcje w kodzie
+
+cart.service.ts: stan koszyka (signals).
+
+add(product): dodaje produkt; jeśli już jest w koszyku, zwiększa ilość (stąd „2x Klawiatura”).
+increase(id) i decrease(id): przyciski + i −; przy 0 sztuk pozycja znika.
+remove(id): usuwa pozycję, clear(): czyści koszyk.
+count i total: computed, czyli liczą się automatycznie przy każdej zmianie koszyka.
+
+product.service.ts
+
+products: lista produktów.
+getById(id): zwraca produkt o danym numerze (strona produktu).
+
+order.service.ts
+
+placeOrder(): udaje wysłanie zamówienia. Czeka 1 sekundę, z 10% szansą rzuca błąd, a przy sukcesie zapisuje zamówienie w lastOrder.
+
+guards.ts
+
+cartNotEmptyGuard: nie wpuszcza do kasy z pustym koszykiem (przekierowuje na /cart).
+hasOrderGuard: nie pokazuje podsumowania, jeśli nie było zamówienia (przekierowuje na stronę główną).
+
+checkout.ts
+
+Konstruktor: po zmianie formy płatności włącza walidację tylko pola BLIK albo karty.
+send(): sprawdza formularz, wysyła zamówienie, przy sukcesie przechodzi na /summary, a przy błędzie pokazuje toast (MatSnackBar).
+
+product-page.ts
+
+product i others: aktualny produkt i pozostałe produkty do karuzeli.
+move(): liczy pozycję kursora nad zdjęciem, żeby powiększało się dokładnie w tym miejscu (zoom).
+
+cart.ts
+
+@Input() editable: ten sam komponent Cart działa jako edytowalny koszyk (strona /cart, header) albo sam podgląd (strona płatności).
