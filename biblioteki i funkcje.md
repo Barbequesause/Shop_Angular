@@ -2,9 +2,11 @@
 
 
 
-**Biblioteki**
+***Biblioteki***
 
-**Angular Material:** gotowe elementy wyglądu (pasek u góry, karty produktów, pola formularza, radio buttony, toast z błędem).
+
+
+**Angular Material:** gotowe elementy wyglądu.
 
 **Angular Router:** przechodzenie między stronami, lazy loading i przekierowania (np. na podsumowanie po płatności).
 
@@ -16,7 +18,9 @@
 
 
 
-**Pliki**
+***Pliki***
+
+
 
 **cart.service.ts:** trzyma koszyk. Dodaje, zwiększa i zmniejsza ilość, usuwa produkty i liczy sumę.
 
@@ -26,11 +30,11 @@
 
 **guards.ts:** blokuje wejście do kasy z pustym koszykiem i na podsumowanie bez zamówienia.
 
-**app.routes.ts:** lista stron i adresów (lazy loading).
+**app.routes.ts:** lista stron i adresów.
 
 **app.html:** górny pasek z linkami i koszykiem, który rozwija się po najechaniu myszką.
 
-**cart/:** jeden koszyk używany w trzech miejscach (strona koszyka, header, podsumowanie w płatności).
+**cart/:** jeden koszyk używany w trzech miejscach.
 
 **product-list/ i product-item/:** lista produktów i pojedyncza karta produktu.
 
@@ -44,25 +48,23 @@
 
 
 
-**Funkcje**
+***Funkcje***
 
 
 
 **cart.service.ts**
 
-
-
 add(product): dodaje produkt do koszyka. Jeśli już tam jest, zwiększa tylko ilość (stąd „2x Klawiatura”).
 
-increase(id): ilość +1 (przycisk +).
+increase(id): ilość +1.
 
-decrease(id): ilość −1 (przycisk −). Przy 0 sztuk produkt znika z koszyka.
+decrease(id): ilość −1. Przy 0 sztuk produkt znika z koszyka.
 
 remove(id): usuwa produkt z koszyka.
 
 clear(): czyści cały koszyk.
 
-count: liczba sztuk w koszyku (liczba w nagłówku „Koszyk (2)”).
+count: liczba sztuk w koszyku.
 
 total: suma do zapłaty.
 
@@ -70,23 +72,17 @@ total: suma do zapłaty.
 
 **product.service.ts**
 
-
-
 getById(id): znajduje produkt po numerze (do strony produktu).
 
 
 
-order.service.ts
-
-
+**order.service.ts**
 
 placeOrder(): udaje wysłanie zamówienia. Czeka sekundę, z 10% szansą rzuca błąd, a przy sukcesie zapisuje zamówienie.
 
 
 
-guards.ts
-
-
+**guards.ts**
 
 cartNotEmptyGuard: nie wpuszcza do kasy z pustym koszykiem.
 
@@ -95,8 +91,6 @@ hasOrderGuard: nie wpuszcza na podsumowanie, jeśli nic nie zamówiono.
 
 
 **product-page.ts**
-
-
 
 product: produkt, który aktualnie oglądasz.
 
@@ -108,9 +102,7 @@ move(): sprawdza, gdzie jest kursor nad zdjęciem, żeby powiększyć dokładnie
 
 **checkout.ts**
 
-
-
-konstruktor: po zmianie formy płatności włącza sprawdzanie tylko właściwego pola (kod BLIK albo numer karty).
+construktor: po zmianie formy płatności włącza sprawdzanie tylko właściwego pola (kod BLIK albo numer karty).
 
 send(): sprawdza formularz i wysyła zamówienie. Przy sukcesie przechodzi na podsumowanie, a przy błędzie pokazuje toast.
 
@@ -118,9 +110,5 @@ send(): sprawdza formularz i wysyła zamówienie. Przy sukcesie przechodzi na po
 
 **cart.ts**
 
-
-
-editable: ustawienie, czy koszyk ma przyciski (+, − , Usuń). Na stronie płatności jest wyłączone, więc pokazuje się sam podgląd.
-
-
+editable: ustawienie, czy koszyk ma przyciski. Na stronie płatności jest wyłączone, więc pokazuje się sam podgląd.
 
