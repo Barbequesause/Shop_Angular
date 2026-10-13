@@ -1,38 +1,69 @@
-import { CurrencyPipe } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, afterNextRender, inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { CurrencyPipe, isPlatformBrowser } from '@angular/common';
+import {
+  AfterViewInit,
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  PLATFORM_ID,
+  inject,
+  viewChild,
+} from '@angular/core';
+import InnerImageZoom from 'inner-image-zoom';
 import { CartService } from '../../cart.service';
 import { ProductItem } from '../../product-item/product-item';
 import { ProductService } from '../../product.service';
 
 @Component({
   selector: 'app-product-page',
-  imports: [CurrencyPipe, MatButtonModule, ProductItem],
+  imports: [CurrencyPipe, ProductItem],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './product-page.html',
   styleUrl: './product-page.scss',
 })
-export class ProductPage {
+export class ProductPage implements AfterViewInit, OnDestroy {
   cart = inject(CartService);
   private productService = inject(ProductService);
+  private isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   @Input() id = '';
 
   stars = [1, 2, 3, 4, 5];
 
-  origin = '50% 50%';
+  private readonly zoomFrame = viewChild<ElementRef<HTMLElement>>('zoomFrame');
+  private zoom?: { uninit(): void };
 
-  constructor() {
-    afterNextRender(() => {
-      import('swiper/element/bundle').then((m) => m.register());
-    });
+  ngAfterViewInit(): void {
+    if (!this.isBrowser) return;
+
+    this.initCarousel();
+
+    // małe opóźnienie, żeby zdjęcie zdążyło się wyrenderować
+    setTimeout(() => this.initZoom(), 100);
   }
 
-  move(event: MouseEvent) {
-    const box = (event.currentTarget as HTMLElement).getBoundingClientRect();
-    const x = ((event.clientX - box.left) / box.width) * 100;
-    const y = ((event.clientY - box.top) / box.height) * 100;
-    this.origin = `${x}% ${y}%`;
+  private initZoom(): void {
+    console.log('zoomFrame:', this.zoomFrame());
+
+    if (!this.zoomFrame()) return;
+
+    this.zoom = new InnerImageZoom('.image-frame.iiz', {
+      zoomScale: 2.5,
+      zoomType: 'hover',
+      zoomPreload: true,
+      fadeDuration: 0,
+    }) as unknown as { uninit(): void };
+
+    console.log('po inicjalizacji:', document.querySelector('.iiz')?.outerHTML);
+  }
+
+  ngOnDestroy(): void {
+    this.zoom?.uninit();
+  }
+
+  private initCarousel(): void {
+    import('swiper/element/bundle').then((m) => m.register());
   }
 
   get product() {

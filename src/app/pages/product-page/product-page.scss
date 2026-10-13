@@ -5,23 +5,16 @@
   margin-bottom: 40px;
 }
 
-.zoom {
+.image-frame {
   width: 450px;
   max-width: 100%;
-  overflow: hidden;
   background: white;
   border: 2px solid var(--beige);
-  cursor: zoom-in;
 }
 
-.zoom img {
+.image-frame img {
   display: block;
   width: 100%;
-  transition: transform 0.2s;
-}
-
-.zoom:hover img {
-  transform: scale(2);
 }
 
 .stars {

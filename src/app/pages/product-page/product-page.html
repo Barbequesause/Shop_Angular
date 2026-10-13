@@ -1,7 +1,7 @@
 @if (product; as p) {
   <div class="product">
-    <div class="zoom" (mousemove)="move($event)">
-      <img [src]="p.bigImage" [alt]="p.name" [style.transform-origin]="origin" />
+    <div class="image-frame iiz" #zoomFrame [attr.data-zoom-src]="p.bigImage">
+      <img [src]="p.image" [alt]="p.name" />
     </div>
 
     <div class="info">
