@@ -1,10 +1,13 @@
 @if (product; as p) {
   <!-- jak produkt istnieje to pokazujemy stronę, jak nie to komunikat na dole -->
   <div class="product">
-    <div class="image-frame iiz" #zoomFrame [attr.data-zoom-src]="p.bigImage">
-      <img [src]="p.image" [alt]="p.name" />
-    </div>
-    <!-- iiz i data-zoom-src to dla biblioteki zoomu, #zoomFrame łapie ramkę w .ts -->
+    @if (showZoom()) {
+      <!-- ramka ze zdjęciem rysuje się dopiero w przeglądarce (żeby zoom się włączył) -->
+      <div class="image-frame iiz" #zoomFrame [attr.data-zoom-src]="p.bigImage">
+        <img [src]="p.image" [alt]="p.name" />
+      </div>
+      <!-- iiz i data-zoom-src to dla biblioteki zoomu, #zoomFrame łapie ramkę w .ts -->
+    }
 
     <div class="info">
       <h1>{{ p.name }}</h1>

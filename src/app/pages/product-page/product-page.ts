@@ -8,6 +8,7 @@ import {
   OnDestroy,
   PLATFORM_ID,
   inject,
+  signal,
   viewChild,
 } from '@angular/core';
 import InnerImageZoom from 'inner-image-zoom';
@@ -35,6 +36,9 @@ export class ProductPage implements AfterViewInit, OnDestroy {
   stars = [1, 2, 3, 4, 5];
   //do rysowania gwiazdek w html
 
+  showZoom = signal(false);
+  //false na serwerze, true dopiero w przeglądarce (wtedy rysujemy zdjęcie od nowa)
+
   private readonly zoomFrame = viewChild<ElementRef<HTMLElement>>('zoomFrame');
   //łapie ramkę ze zdjęciem (#zoomFrame w html)
   private zoom?: { uninit(): void };
@@ -47,15 +51,19 @@ export class ProductPage implements AfterViewInit, OnDestroy {
 
     this.initCarousel();
 
-    if (this.zoomFrame()) {
-      //jak ramka istnieje to włączamy zoom
-      this.zoom = new InnerImageZoom('.image-frame.iiz', {
-        zoomScale: 2.5,
-        //ile razy przybliża
-      }) as unknown as {
-        uninit(): void;
-      };
-    }
+    this.showZoom.set(true);
+    //teraz rysujemy ramkę ze zdjęciem
+    setTimeout(() => {
+      //małe opóźnienie żeby ramka zdążyła się pojawić
+      if (this.zoomFrame()) {
+        this.zoom = new InnerImageZoom('.image-frame.iiz', {
+          zoomScale: 2.5,
+          //ile razy przybliża
+        }) as unknown as {
+          uninit(): void;
+        };
+      }
+    }, 100);
   }
 
   ngOnDestroy(): void {
