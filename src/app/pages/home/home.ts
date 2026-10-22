@@ -12,4 +12,5 @@ import { ProductService } from '../../product.service';
 })
 export class Home {
   protected readonly products = inject(ProductService).products;
+  //bierze listę produktów z serwisu i daje ją do listy
 }

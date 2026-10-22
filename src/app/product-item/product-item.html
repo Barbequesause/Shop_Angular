@@ -1,4 +1,5 @@
 <mat-card appearance="outlined">
+  <!-- kliknięcie zdjęcia albo nazwy otwiera stronę produktu -->
   <a [routerLink]="['/product', product.id]">
     <img mat-card-image [src]="product.image" [alt]="product.name" />
   </a>

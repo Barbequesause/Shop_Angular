@@ -8,6 +8,7 @@ import { Cart } from '../../cart/cart';
     <h1>Koszyk</h1>
     <div class="wrapper"><app-cart /></div>
   `,
+  //cała strona to tytuł i ten sam komponent koszyka co w headerze
   styles: `
     .wrapper {
       max-width: 640px;

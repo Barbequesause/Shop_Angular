@@ -1,8 +1,10 @@
 @if (product; as p) {
+  <!-- jak produkt istnieje to pokazujemy stronę, jak nie to komunikat na dole -->
   <div class="product">
     <div class="image-frame iiz" #zoomFrame [attr.data-zoom-src]="p.bigImage">
       <img [src]="p.image" [alt]="p.name" />
     </div>
+    <!-- iiz i data-zoom-src to dla biblioteki zoomu, #zoomFrame łapie ramkę w .ts -->
 
     <div class="info">
       <h1>{{ p.name }}</h1>
@@ -12,6 +14,7 @@
         }
         <span class="grade">{{ p.rating }} / 5</span>
       </p>
+      <!-- gwiazdka pełna jak ocena >= numer gwiazdki, inaczej pusta -->
       <p class="price">{{ p.price | currency: 'PLN' }}</p>
       <p>{{ p.description }}</p>
       <button class="btn" (click)="cart.add(p)">Dodaj do koszyka</button>
@@ -19,6 +22,7 @@
   </div>
 
   <h2>Zobacz też</h2>
+  <!-- karuzela z reszty produktów -->
   <swiper-container slides-per-view="auto" space-between="16" navigation="true">
     @for (o of others; track o.id) {
       <swiper-slide>

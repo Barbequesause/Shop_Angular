@@ -3,16 +3,17 @@ import { CanActivateFn, Router } from '@angular/router';
 import { CartService } from './cart.service';
 import { OrderService } from './order.service';
 
-//nie możesz iść z pustym koszykiem
+//guardy = pilnują kto gdzie może wejść
 export const cartNotEmptyGuard: CanActivateFn = () => {
   const cart = inject(CartService);
   const router = inject(Router);
   return cart.count() > 0 ? true : router.createUrlTree(['/cart']);
+  //jak w koszyku coś jest to wpuszcza do kasy, jak nie to wraca na /cart
 };
 
-//podsumpwanie po złożeniu zamówienia
 export const hasOrderGuard: CanActivateFn = () => {
   const orders = inject(OrderService);
   const router = inject(Router);
   return orders.lastOrder() ? true : router.createUrlTree(['/']);
+  //jak było zamówienie to pokazuje podsumowanie, jak nie to na stronę główną
 };

@@ -1,9 +1,11 @@
 @if (cart.items().length === 0) {
   <p>Koszyk jest pusty.</p>
 } @else {
+  <!-- @for robi jeden wiersz na każdą rzecz w koszyku -->
   @for (item of cart.items(); track item.product.id) {
     <div class="row">
       <span class="name">{{ item.quantity }}x {{ item.product.name }}</span>
+      <!-- tak wychodzi "2x Klawiatura" -->
 
       @if (editable) {
         <button class="btn-light" (click)="cart.decrease(item.product.id)">−</button>

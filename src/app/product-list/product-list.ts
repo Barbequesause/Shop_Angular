@@ -10,4 +10,5 @@ import { ProductItem } from '../product-item/product-item';
 })
 export class ProductList {
   @Input() products: Product[] = [];
+  //lista produktów dostaje od strony głównej
 }

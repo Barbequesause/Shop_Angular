@@ -2,6 +2,7 @@
 
 <div class="layout">
   <form [formGroup]="form" (ngSubmit)="send()">
+    <!-- formControlName łączy pole z formularzem w .ts, mat-error to komunikat jak źle wpisane -->
     <mat-form-field appearance="outline">
       <mat-label>Imię</mat-label>
       <input matInput formControlName="firstName" />
@@ -39,6 +40,7 @@
       <mat-radio-button value="Przelew">Przelew</mat-radio-button>
     </mat-radio-group>
 
+    <!-- pole BLIK pokazuje się tylko jak wybrany BLIK -->
     @if (payment() === 'BLIK') {
       <mat-form-field appearance="outline">
         <mat-label>Kod BLIK (6 cyfr)</mat-label>
@@ -47,6 +49,7 @@
       </mat-form-field>
     }
 
+    <!-- a to tylko jak wybrana karta -->
     @if (payment() === 'Karta') {
       <mat-form-field appearance="outline">
         <mat-label>Numer karty (16 cyfr)</mat-label>
@@ -58,10 +61,12 @@
     <button class="btn" type="submit" [disabled]="sending()">
       {{ sending() ? 'Przetwarzanie...' : 'Zapłać ' + (cart.total() | currency: 'PLN') }}
     </button>
+    <!-- w trakcie wysyłania przycisk jest wyłączony -->
   </form>
 
   <aside>
     <h2>Twoje zamówienie</h2>
     <app-cart [editable]="false" />
+    <!-- ten sam koszyk ale bez przycisków (sam podgląd) -->
   </aside>
 </div>
